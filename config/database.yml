@@ -29,12 +29,14 @@
 development:
   adapter: postgresql
   encoding: utf8
-  reconnect: false
   database: DemoForAngular_development
   pool: 5
   username: postgres
   password: postgres
   host: localhost
+  timeout: 5000
+  port: 5432
+
   #bin_path: /usr/bin/sphinx-searchd
 
 # Warning: The database defined as "test" will be erased and
@@ -49,6 +51,8 @@ test: &test
   username: postgres
   password: postgres
   host: localhost
+  timeout: 5000
+  port: 5432
   #bin_path: /usr/bin/sphinx-searchd
 
 # production:
