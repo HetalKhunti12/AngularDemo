@@ -1,7 +1,0 @@
-I"}(function() {
-  var DemoForAngular;
-
-  DemoForAngular = angular.module('DemoForAngular', [ngResource]);
-
-}).call(this);
-:ET
