@@ -28,7 +28,7 @@
 #   password: postgres
 development:
   adapter: postgresql
-  encoding: utf8
+  encoding: unicode
   database: DemoForAngular_development
   pool: 5
   username: postgres

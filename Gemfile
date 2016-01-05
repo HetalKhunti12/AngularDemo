@@ -22,7 +22,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bower-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
-#gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 gem "sinatra", "~> 1.4.6"
 gem 'grape', '~> 0.12.0'
 gem "hashie-forbidden_attributes"
@@ -32,6 +32,7 @@ gem 'bootstrap-sass', '~> 3.2.0.2'
 gem 'responders', '~> 2.0' 
 gem 'guard-cucumber'
 gem 'guard'
+gem 'puma'
 #gem "jasmine", github: "pivotal/jasmine-gem"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

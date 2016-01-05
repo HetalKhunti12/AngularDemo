@@ -1,0 +1,592 @@
+  [1m[36m (45.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (27.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20150813125655)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (79.1ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "phone_no" integer, "dob" date, "address" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150813125655"]]
+  [1m[36m (34.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePosts (20150814072818)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (43.0ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "title" character varying, "content" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150814072818"]]
+  [1m[36m (20.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.5ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'posts'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:39:09 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 3330ms (Views: 3322.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap_config.self-8568caa56ee90062b37834ca46c1491863c4af9181a50edf6c9845a20ef13b66.css?body=1" for 127.0.0.1 at 2016-01-04 11:39:12 +0530
+
+
+Started GET "/assets/scaffolds.self-43685e2f4dd897c3628aa7e4ca7796b9bbe7b8bb8b79ea4953e282298a820ff8.css?body=1" for 127.0.0.1 at 2016-01-04 11:39:12 +0530
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-04 11:39:13 +0530
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 25ms (Views: 1.1ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 11:39:51 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"hetal", "last_name"=>"khunti", "email"=>"hetal@briskbrain.com", "phone_no"=>"1234567899", "user"=>{"first_name"=>"hetal", "last_name"=>"khunti", "email"=>"hetal@briskbrain.com", "phone_no"=>"1234567899"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (17.3ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["first_name", "hetal"], ["last_name", "khunti"], ["email", "hetal@briskbrain.com"], ["phone_no", 1234567899], ["created_at", "2016-01-04 06:09:51.655354"], ["updated_at", "2016-01-04 06:09:51.655354"]]
+  [1m[36m (11.7ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 42ms (ActiveRecord: 31.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:39:51 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 37ms (Views: 36.1ms | ActiveRecord: 0.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:51:23 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 256ms (Views: 248.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/api/v1/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap_config.self-8568caa56ee90062b37834ca46c1491863c4af9181a50edf6c9845a20ef13b66.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/scaffolds.self-43685e2f4dd897c3628aa7e4ca7796b9bbe7b8bb8b79ea4953e282298a820ff8.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/todolists.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/todo.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/application.self-12a6cf777aa6e94c892568a9c496b61a14ff6cb181ef5fbb1ef1c9b0c2a64c1a.css?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/jquery/dist/jquery.self-a4777c1acac0a74340755725342901a54ed000955bf6f5320491b8b2514c86ec.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/angular/angular.self-5918d434c9cc209ba9ff042e92494418b0d4189738c99bedd51c5bbdefe0f11c.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/angular-resource.self-a3123e7a45f213633b64872b90aaabd226daf59fd549e40964e697fb960d3d51.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/affix.self-d2b642d8fbfc1d7041e2edefd66683ada567a980789dcd6f94fddda0b33408b5.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/alert.self-a29e91e8cd3ddaba9bbc466901d53ec2127e9256b9b941905d525a3a716bd1a5.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/button.self-a6cb16785434acb365ae426aef9f1fce05ed553cae7a965e4471c3da71509175.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/carousel.self-57eb8422043cf0a85b7a9dc6843916eb0a3e35b419c7798a5eb254b918997631.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/collapse.self-7dc8bfbc2fbfabd2bad62c58ff8ffeaf8f20fb87c7ca6cd35f06d4dc19632587.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/dropdown.self-9314126777c6be5443e37ea7f7967d7914d72b3e60449ba50edc967446373059.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/tab.self-122235057fbd4c6c7da377d59dc58f47b44cb1088a2e38e6ee6ce9d8ac29a26a.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/scrollspy.self-a155b9d4b2f978905f0326c0f6635e1134fe91c6bfbfcbad079fa24a9fef2b0e.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/tooltip.self-11cf547be953f25f511cec668f6690473fd97b2f65502e4032f4030999a3f0c3.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap/popover.self-77d8e3a2499c1104ef146396a68b82469ee2bdb365199b874694698d10405e9a.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/angular_app.self-ce1106dcc2314fa55783c6602eeacee2d3995f08182e904a91da5fe63b9bb71f.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/api/v1/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/app.self-4b300e88ef1862184893b72c7e17b06f9fd31e41af838f2b28ae3f727787b166.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/todo.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/todolists.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/users.self-8ffb7247906d9926b78fdd8f8dddf1aa40dea0c29f29260d8765b34b0257a005.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/assets/application.self-44dc72337fbefc4f8c73fc8781b922cf9e4f99f8d068e6563c3820851d9390f6.js?body=1" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-04 11:51:24 +0530
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 10ms (Views: 6.2ms | ActiveRecord: 2.1ms)
+
+
+Started DELETE "/users/1?email=hetal@briskbrain.com&first_name=hetal&last_name=khunti&phone_no=1234567899" for 127.0.0.1 at 2016-01-04 11:51:41 +0530
+Processing by UsersController#destroy as JSON
+  Parameters: {"email"=>"hetal@briskbrain.com", "first_name"=>"hetal", "last_name"=>"khunti", "phone_no"=>"1234567899", "id"=>"1"}
+Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (34.4ms)[0m  COMMIT
+Completed 204 No Content in 113ms (ActiveRecord: 35.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 11:51:44 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"aaa", "email"=>"aaa@bbb.com", "last_name"=>"bbb", "phone_no"=>"111111111", "user"=>{"first_name"=>"aaa", "last_name"=>"bbb", "email"=>"aaa@bbb.com", "phone_no"=>"111111111"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["first_name", "aaa"], ["last_name", "bbb"], ["email", "aaa@bbb.com"], ["phone_no", 111111111], ["created_at", "2016-01-04 06:21:44.816955"], ["updated_at", "2016-01-04 06:21:44.816955"]]
+  [1m[36m (14.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 17ms (ActiveRecord: 14.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:51:44 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 11:52:04 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"wwww", "email"=>"ww@yy.com", "last_name"=>"yyy", "phone_no"=>"11111111111", "user"=>{"first_name"=>"wwww", "last_name"=>"yyy", "email"=>"ww@yy.com", "phone_no"=>"11111111111"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms)
+
+RangeError (11111111111 is out of range for ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Integer with limit 4):
+  app/controllers/users_controller.rb:14:in `create'
+
+
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.1ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.7ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (13.7ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007f9eeeafdb08 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007f9eeeae55d0 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007f9eeea85e50 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 99ms (Views: 98.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/api/v1/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap_config.self-8568caa56ee90062b37834ca46c1491863c4af9181a50edf6c9845a20ef13b66.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/scaffolds.self-43685e2f4dd897c3628aa7e4ca7796b9bbe7b8bb8b79ea4953e282298a820ff8.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/todolists.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/todo.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/application.self-12a6cf777aa6e94c892568a9c496b61a14ff6cb181ef5fbb1ef1c9b0c2a64c1a.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/jquery/dist/jquery.self-a4777c1acac0a74340755725342901a54ed000955bf6f5320491b8b2514c86ec.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/angular/angular.self-5918d434c9cc209ba9ff042e92494418b0d4189738c99bedd51c5bbdefe0f11c.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/angular-resource.self-a3123e7a45f213633b64872b90aaabd226daf59fd549e40964e697fb960d3d51.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/affix.self-d2b642d8fbfc1d7041e2edefd66683ada567a980789dcd6f94fddda0b33408b5.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/alert.self-a29e91e8cd3ddaba9bbc466901d53ec2127e9256b9b941905d525a3a716bd1a5.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/button.self-a6cb16785434acb365ae426aef9f1fce05ed553cae7a965e4471c3da71509175.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/carousel.self-57eb8422043cf0a85b7a9dc6843916eb0a3e35b419c7798a5eb254b918997631.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/collapse.self-7dc8bfbc2fbfabd2bad62c58ff8ffeaf8f20fb87c7ca6cd35f06d4dc19632587.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/dropdown.self-9314126777c6be5443e37ea7f7967d7914d72b3e60449ba50edc967446373059.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/tab.self-122235057fbd4c6c7da377d59dc58f47b44cb1088a2e38e6ee6ce9d8ac29a26a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/scrollspy.self-a155b9d4b2f978905f0326c0f6635e1134fe91c6bfbfcbad079fa24a9fef2b0e.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/tooltip.self-11cf547be953f25f511cec668f6690473fd97b2f65502e4032f4030999a3f0c3.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap/popover.self-77d8e3a2499c1104ef146396a68b82469ee2bdb365199b874694698d10405e9a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/angular_app.self-ce1106dcc2314fa55783c6602eeacee2d3995f08182e904a91da5fe63b9bb71f.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/api/v1/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/app.self-4b300e88ef1862184893b72c7e17b06f9fd31e41af838f2b28ae3f727787b166.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/todo.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/todolists.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/users.self-8ffb7247906d9926b78fdd8f8dddf1aa40dea0c29f29260d8765b34b0257a005.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/assets/application.self-44dc72337fbefc4f8c73fc8781b922cf9e4f99f8d068e6563c3820851d9390f6.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:05 +0530
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-04 11:52:06 +0530
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 11:52:22 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"rwrwerr", "email"=>"rer@ertret.com", "last_name"=>"dda", "phone_no"=>"4444444", "user"=>{"first_name"=>"rwrwerr", "last_name"=>"dda", "email"=>"rer@ertret.com", "phone_no"=>"4444444"}}
+Can't verify CSRF token authenticity
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["first_name", "rwrwerr"], ["last_name", "dda"], ["email", "rer@ertret.com"], ["phone_no", 4444444], ["created_at", "2016-01-04 06:22:22.653516"], ["updated_at", "2016-01-04 06:22:22.653516"]]
+  [1m[35m (18.7ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 19.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:52:22 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 11:52:37 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"7777", "email"=>"7777@teret.com", "last_name"=>"7777", "phone_no"=>"777777", "user"=>{"first_name"=>"7777", "last_name"=>"7777", "email"=>"7777@teret.com", "phone_no"=>"777777"}}
+Can't verify CSRF token authenticity
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["first_name", "7777"], ["last_name", "7777"], ["email", "7777@teret.com"], ["phone_no", 777777], ["created_at", "2016-01-04 06:22:37.252783"], ["updated_at", "2016-01-04 06:22:37.252783"]]
+  [1m[35m (19.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 19.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:52:37 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 95ms (Views: 94.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/api/v1/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap_config.self-8568caa56ee90062b37834ca46c1491863c4af9181a50edf6c9845a20ef13b66.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/scaffolds.self-43685e2f4dd897c3628aa7e4ca7796b9bbe7b8bb8b79ea4953e282298a820ff8.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/todolists.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/todo.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/application.self-12a6cf777aa6e94c892568a9c496b61a14ff6cb181ef5fbb1ef1c9b0c2a64c1a.css?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/jquery/dist/jquery.self-a4777c1acac0a74340755725342901a54ed000955bf6f5320491b8b2514c86ec.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/angular/angular.self-5918d434c9cc209ba9ff042e92494418b0d4189738c99bedd51c5bbdefe0f11c.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/angular-resource.self-a3123e7a45f213633b64872b90aaabd226daf59fd549e40964e697fb960d3d51.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/affix.self-d2b642d8fbfc1d7041e2edefd66683ada567a980789dcd6f94fddda0b33408b5.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/alert.self-a29e91e8cd3ddaba9bbc466901d53ec2127e9256b9b941905d525a3a716bd1a5.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/button.self-a6cb16785434acb365ae426aef9f1fce05ed553cae7a965e4471c3da71509175.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/carousel.self-57eb8422043cf0a85b7a9dc6843916eb0a3e35b419c7798a5eb254b918997631.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/collapse.self-7dc8bfbc2fbfabd2bad62c58ff8ffeaf8f20fb87c7ca6cd35f06d4dc19632587.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/dropdown.self-9314126777c6be5443e37ea7f7967d7914d72b3e60449ba50edc967446373059.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/tab.self-122235057fbd4c6c7da377d59dc58f47b44cb1088a2e38e6ee6ce9d8ac29a26a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/transition.self-09ff30b1e8a93d1f7728b9855f55d9c9d8d5734c8861e0d8139994e50944572a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/scrollspy.self-a155b9d4b2f978905f0326c0f6635e1134fe91c6bfbfcbad079fa24a9fef2b0e.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/modal.self-72f95ffa1071297725a9ac91989693d56d1abf23f441a47455073b0da2857a5b.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/tooltip.self-11cf547be953f25f511cec668f6690473fd97b2f65502e4032f4030999a3f0c3.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap/popover.self-77d8e3a2499c1104ef146396a68b82469ee2bdb365199b874694698d10405e9a.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/angular_app.self-ce1106dcc2314fa55783c6602eeacee2d3995f08182e904a91da5fe63b9bb71f.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/api/v1/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:38 +0530
+
+
+Started GET "/assets/app.self-4b300e88ef1862184893b72c7e17b06f9fd31e41af838f2b28ae3f727787b166.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/assets/todo.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/assets/todolists.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/assets/users.self-8ffb7247906d9926b78fdd8f8dddf1aa40dea0c29f29260d8765b34b0257a005.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/assets/application.self-44dc72337fbefc4f8c73fc8781b922cf9e4f99f8d068e6563c3820851d9390f6.js?body=1" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-04 11:52:39 +0530
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 14:27:10 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 251ms (Views: 243.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-04 14:27:11 +0530
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 11ms (Views: 6.4ms | ActiveRecord: 3.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 14:27:25 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"ddasd", "email"=>"dsd@fgdf.com", "last_name"=>"aaaa", "phone_no"=>"111111111", "user"=>{"first_name"=>"ddasd", "last_name"=>"aaaa", "email"=>"dsd@fgdf.com", "phone_no"=>"111111111"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["first_name", "ddasd"], ["last_name", "aaaa"], ["email", "dsd@fgdf.com"], ["phone_no", 111111111], ["created_at", "2016-01-04 08:57:25.404218"], ["updated_at", "2016-01-04 08:57:25.404218"]]
+  [1m[36m (16.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 17.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-04 14:27:25 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-04 14:29:42 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{}}
+Can't verify CSRF token authenticity
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  app/controllers/users_controller.rb:24:in `visitor_params'
+  app/controllers/users_controller.rb:14:in `create'
+
+
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.8ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.5ms)
+  Rendered /home/briskbrain/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (9.6ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fb62f308800 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fb62f2ffdb8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fb62f2fb830 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-05 11:21:49 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (22.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (17.4ms)
+Completed 200 OK in 446ms (Views: 440.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-01-05 11:21:50 +0530
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 75ms (Views: 21.6ms | ActiveRecord: 30.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-01-05 11:22:11 +0530
+Processing by UsersController#create as JSON
+  Parameters: {"first_name"=>"hhhh", "last_name"=>"mmmm", "email"=>"hhh@gfg.com", "phone_no"=>"123456789", "user"=>{"first_name"=>"hhhh", "last_name"=>"mmmm", "email"=>"hhh@gfg.com", "phone_no"=>"123456789"}}
+Can't verify CSRF token authenticity
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (32.5ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "phone_no", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["first_name", "hhhh"], ["last_name", "mmmm"], ["email", "hhh@gfg.com"], ["phone_no", 123456789], ["created_at", "2016-01-05 05:52:11.446756"], ["updated_at", "2016-01-05 05:52:11.446756"]]
+  [1m[36m (10.7ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 87ms (ActiveRecord: 43.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-05 11:22:11 +0530
+Processing by UsersController#index as JSON
+  Parameters: {"user"=>{}}
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.4ms)
