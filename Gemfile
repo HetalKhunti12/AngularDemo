@@ -22,7 +22,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bower-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+#gem 'sdoc', '~> 0.4.0', group: :doc
 gem "sinatra", "~> 1.4.6"
 gem 'grape', '~> 0.12.0'
 gem "hashie-forbidden_attributes"
@@ -41,6 +41,11 @@ gem 'guard'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :production do
+  gem 'rails_12factor'
+end
+
+
 gem 'sass', '3.2.19' 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
@@ -52,7 +57,7 @@ group :test, :development do
 end
 group :test do
   gem 'shoulda-matchers'
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails'
   gem 'database_cleaner'
 end
 
